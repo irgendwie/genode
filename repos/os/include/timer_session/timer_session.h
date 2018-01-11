@@ -54,6 +54,11 @@ struct Timer::Session : Genode::Session
 	virtual unsigned long elapsed_ms() const = 0;
 
 	/**
+	 * Return number of elapsed microseconds since system start
+	 */
+	virtual unsigned long now_us() const = 0;
+
+	/**
 	 * Client-side convenience method for sleeping the specified number
 	 * of milliseconds
 	 */
@@ -74,9 +79,10 @@ struct Timer::Session : Genode::Session
 	GENODE_RPC(Rpc_trigger_periodic, void, trigger_periodic, unsigned);
 	GENODE_RPC(Rpc_sigh, void, sigh, Genode::Signal_context_capability);
 	GENODE_RPC(Rpc_elapsed_ms, unsigned long, elapsed_ms);
+	GENODE_RPC(Rpc_now_us, unsigned long, now_us);
 
 	GENODE_RPC_INTERFACE(Rpc_trigger_once, Rpc_trigger_periodic,
-	                     Rpc_sigh, Rpc_elapsed_ms);
+	                     Rpc_sigh, Rpc_elapsed_ms, Rpc_now_us);
 };
 
 #endif /* _INCLUDE__TIMER_SESSION__TIMER_SESSION_H_ */

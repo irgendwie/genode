@@ -275,6 +275,11 @@ class Timer::Session_component : public Genode::Rpc_object<Session>,
 			return (now - _initial_time) / 1000;
 		}
 
+		unsigned long now_us() const
+		{
+			return _timeout_scheduler.curr_time();
+		}
+
 		void msleep(unsigned) { /* never called at the server side */ }
 		void usleep(unsigned) { /* never called at the server side */ }
 };
