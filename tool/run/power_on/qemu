@@ -46,7 +46,7 @@ proc run_power_on { } {
 		# expects to be available. Not doing so leads to inexplicable errors.
 		#
 		regsub -all {\-m ([0-9])+} $qemu_args "" qemu_args
-		append qemu_args " -m 768"
+		append qemu_args " -m 1024"
 		append qemu_args " -M realview-pbx-a9"
 	}
 	if {[have_spec vpb926]} { append qemu_args " -M versatilepb     -m 128 " }
