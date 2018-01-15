@@ -408,7 +408,10 @@ unsigned Platform_thread::num_cores() const
 {
 	l4_sched_cpu_set_t cpus = l4_sched_cpu_set(0, 0, 1);
 	l4_umword_t cpus_max;
-	return (unsigned)l4_scheduler_info(L4_BASE_SCHEDULER_CAP, &cpus_max, &cpus).raw;
+	l4_scheduler_info(L4_BASE_SCHEDULER_CAP, &cpus_max, &cpus);
+
+	// count set bits in the online/offline cpus bitmap
+	return __builtin_popcount(cpus.map);
 }
 
 void Platform_thread::rq(Genode::Dataspace_capability ds) const
