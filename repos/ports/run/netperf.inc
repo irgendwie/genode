@@ -9,7 +9,7 @@ if {[have_include "power_on/qemu"]} {
 	exit
 }
 
-if {[have_spec hw_odroid_xu] || [have_spec hw_wand_quad]} {
+if {[have_spec hw_odroid_xu]} {
 	puts "Run script does not support this platform."
 	exit 0
 }
@@ -158,8 +158,9 @@ append_if $use_usb_driver config {
 	</start>}
 
 append_if $use_nic_driver config {
-	<start name="nic_drv">
-		<resource name="RAM" quantum="4M"/>
+	<start name="nic_drv" caps="120">
+		<binary name="} [nic_drv_binary] {"/>
+		<resource name="RAM" quantum="20M"/>
 		<provides><service name="Nic"/></provides>
 	</start>}
 
