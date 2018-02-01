@@ -135,7 +135,8 @@ class Init::Child_policy_handle_cpu_priorities
 			if (priority & discarded_prio_lsb_bits_mask) {
 				warning("priority band too small, losing least-significant priority bits");
 			}
-			priority >>= _prio_levels_log2;
+			FIXME
+			//priority >>= _prio_levels_log2;
 
 			/* assign child priority to the most significant priority bits */
 			priority |= _priority*(Cpu_session::PRIORITY_LIMIT >> _prio_levels_log2);
