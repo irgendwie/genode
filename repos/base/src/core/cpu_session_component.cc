@@ -408,7 +408,7 @@ void Cpu_session_component::dead(Genode::Dataspace_capability ds)
 	//get last thread, which is also main thread
 	while(thread->next())
 	{
-		PDBG("%s",thread->platform_thread().name());
+		//PDBG("%s",thread->platform_thread().name());
 		thread=thread->next();
 	}
 	thread->platform_thread().dead(ds);
