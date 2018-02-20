@@ -58,6 +58,8 @@ class Genode::Ram_session_guard : public Genode::Ram_session
 		size_t quota() override { return _quota; }
 
 		size_t used() override { return _used; }
+		
+		void set_label(char *label) override { }
 };
 
 #endif /* _RAM_SESSION_GUARD_H_ */
