@@ -103,8 +103,8 @@ append config {
 }
 
 append_if $use_nic_driver config {
-	<start name="nic_drv">
-		<resource name="RAM" quantum="4M"/>
+	<start name="nic_drv" caps="130">
+		<resource name="RAM" quantum="20M"/>
 		<provides> <service name="Nic"/> </provides>
 	</start>}
 
