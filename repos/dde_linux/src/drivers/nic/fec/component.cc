@@ -173,8 +173,9 @@ void Session_component::link_state(bool link)
 Session_component::Session_component(Genode::size_t const tx_buf_size,
                                      Genode::size_t const rx_buf_size,
                                      Genode::Allocator &  rx_block_md_alloc,
-                                     Genode::Env &        env)
-: Nic::Session_component(tx_buf_size, rx_buf_size, rx_block_md_alloc, env.ram(), env.ep()),
+				     Genode::Ram_session &ram_session,
+				     Server::Entrypoint &ep)
+: Nic::Session_component(tx_buf_size, rx_buf_size, rx_block_md_alloc, ram_session, ep),
   _ndev(fec_get_my_registered_net_device()),
   _has_link(!(_ndev->state & (1UL << __LINK_STATE_NOCARRIER))) {
 	_register_session_component(*this); }

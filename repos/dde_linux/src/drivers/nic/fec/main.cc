@@ -19,6 +19,8 @@
 
 #include <component.h>
 
+#include <util/reconstructible.h>
+
 /* Linux emulation environment includes */
 #include <lx_emul.h>
 #include <lx_kit/env.h>
@@ -47,7 +49,7 @@ struct Main
 	Genode::Entrypoint            &ep     { env.ep() };
 	Genode::Attached_rom_dataspace config { env, "config" };
 	Genode::Heap                   heap   { env.ram(), env.rm() };
-	Nic::Root<Session_component>   root   { env, heap };
+	Nic::Root<Session_component>   root   { ep, *Genode::env()->heap() };
 
 	/* Linux task that handles the initialization */
 	Genode::Constructible<Lx::Task> linux;
@@ -59,13 +61,13 @@ struct Main
 		Lx_kit::construct_env(env);
 
 		/* init singleton Lx::Scheduler */
-		Lx::scheduler(&env);
+		Lx::scheduler();
 
 		//Lx::pci_init(env, env.ram(), heap);
-		Lx::malloc_init(env, heap);
+		//Lx::malloc_init(env, heap);
 
 		/* init singleton Lx::Timer */
-		Lx::timer(&env, &ep, &heap, &jiffies);
+		Lx::timer(&ep, &jiffies);
 
 		/* init singleton Lx::Irq */
 		Lx::Irq::irq(&ep, &heap);
@@ -105,7 +107,7 @@ static void run_linux(void * m)
 void Component::construct(Genode::Env &env)
 {
 	/* XXX execute constructors of global statics */
-	env.exec_static_constructors();
+	//env.exec_static_constructors();
 
 	static Main m(env);
 }

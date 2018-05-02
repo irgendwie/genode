@@ -63,7 +63,8 @@ class Session_component : public Nic::Session_component
 		Session_component(Genode::size_t const tx_buf_size,
 		                  Genode::size_t const rx_buf_size,
 		                  Genode::Allocator &  rx_block_md_alloc,
-		                  Genode::Env &        env);
+				  Genode::Ram_session & ram_session,
+				  Server::Entrypoint & ep);
 
 		Nic::Mac_address mac_address() override;
 		bool link_state() override { return _has_link; }
