@@ -33,6 +33,7 @@
 #include <lx_emul/impl/timer.h>
 #include <lx_emul/impl/completion.h>
 #include <lx_kit/irq.h>
+#include <lx_kit/env.h>
 
 extern "C" { struct page; }
 
@@ -337,7 +338,7 @@ int platform_get_irq(struct platform_device * d, unsigned int i)
 
 int devm_request_irq(struct device *dev, unsigned int irq, irq_handler_t handler, unsigned long irqflags, const char *devname, void *dev_id)
 {
-	Lx::Irq::irq().request_irq(Platform::Device::create(Lx_kit::env().env(), irq), handler, dev_id);
+	Lx::Irq::irq().request_irq(Platform::Device::create(irq), handler, dev_id);
 	return 0;
 }
 
