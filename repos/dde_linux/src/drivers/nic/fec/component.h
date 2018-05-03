@@ -20,6 +20,8 @@
 
 #include <lx_kit/scheduler.h>
 
+#include <base/session_label.h>
+
 extern "C" {
 	struct net_device;
 	struct napi_struct;
