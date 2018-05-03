@@ -174,9 +174,9 @@ Session_component::Session_component(Genode::size_t const  tx_buf_size,
                                      Genode::Allocator &   rx_block_md_alloc,
                                      Genode::Env &         env,
                                      Genode::Session_label label)
-: Nic::Session_component(tx_buf_size, rx_buf_size, rx_block_md_alloc, env),
+: Nic::Session_component(tx_buf_size, rx_buf_size, rx_block_md_alloc, env.ram(), env.ep()),
   _ndev(_register_session_component(*this, label)),
   _has_link(_ndev ? !(_ndev->state & (1UL << __LINK_STATE_NOCARRIER)) : false)
 {
-	if (!_ndev) throw Genode::Service_denied();
+	if (!_ndev) throw Genode::Parent::Service_denied();
 }
