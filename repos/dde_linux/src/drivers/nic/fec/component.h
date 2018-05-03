@@ -91,6 +91,8 @@ class Root : public Genode::Root_component<Session_component>
 		{
 			using namespace Genode;
 
+			struct Insufficient_ram_quota : Exception { };
+
 			Session_label const label = label_from_args(args);
 
 			size_t ram_quota   = Arg_string::find_arg(args, "ram_quota"  ).ulong_value(0);
@@ -100,7 +102,7 @@ class Root : public Genode::Root_component<Session_component>
 			/* deplete ram quota by the memory needed for the session structure */
 			size_t session_size = max(4096UL, (unsigned long)sizeof(Session_component));
 			if (ram_quota < session_size)
-				throw Genode::Insufficient_ram_quota();
+				throw Insufficient_ram_quota();
 
 			/*
 			 * Check if donated ram quota suffices for both communication
@@ -110,7 +112,7 @@ class Root : public Genode::Root_component<Session_component>
 			    tx_buf_size + rx_buf_size > ram_quota - session_size) {
 				Genode::error("insufficient 'ram_quota', got ", ram_quota, ", "
 				              "need ", tx_buf_size + rx_buf_size + session_size);
-				throw Genode::Insufficient_ram_quota();
+				throw Insufficient_ram_quota();
 			}
 
 			return new (Root::md_alloc())
