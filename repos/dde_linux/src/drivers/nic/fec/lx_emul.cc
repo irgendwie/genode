@@ -37,6 +37,8 @@
 #include <lx_emul/impl/completion.h>
 #include <lx_kit/irq.h>
 
+#include <util/reconstructible.h>
+
 extern "C" { struct page; }
 
 class Addr_to_page_mapping : public Genode::List<Addr_to_page_mapping>::Element
