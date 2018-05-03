@@ -28,6 +28,8 @@
 #include <lx_kit/backend_alloc.h>
 #include <lx_kit/work.h>
 
+#include <util/reconstructible.h>
+
 /* Linux module functions */
 extern "C" int module_fec_driver_init();
 extern "C" int module_phy_module_init();
@@ -57,12 +59,12 @@ struct Main
 		Lx_kit::construct_env(env);
 
 		/* init singleton Lx::Scheduler */
-		Lx::scheduler(&env);
+		Lx::scheduler();
 
-		Lx::malloc_init(env, heap);
+		//Lx::malloc_init(env, heap);
 
 		/* init singleton Lx::Timer */
-		Lx::timer(&env, &ep, &heap, &jiffies);
+		Lx::timer(&ep, &jiffies);
 
 		/* init singleton Lx::Irq */
 		Lx::Irq::irq(&ep, &heap);
@@ -103,7 +105,7 @@ static void run_linux(void * m)
 void Component::construct(Genode::Env &env)
 {
 	/* XXX execute constructors of global statics */
-	env.exec_static_constructors();
+	//env.exec_static_constructors();
 
 	static Main m(env);
 }
