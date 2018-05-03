@@ -13,7 +13,7 @@
  * version 2.
  */
 
-#include <base/ram_allocator.h>
+#include <ram_session/ram_session.h>
 
 #include <lx_kit/backend_alloc.h>
 #include <lx_kit/env.h>
