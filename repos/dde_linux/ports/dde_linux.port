@@ -2,6 +2,7 @@ LICENSE     := GPLv2
 VERSION     := 2
 DOWNLOADS   := dwc_otg.git usb.archive intel_fb.archive lxip.archive \
                wifi.archive fec.archive libnl.archive wpa_supplicant.archive \
+               red.archive \
                fw_3160.archive fw_6000.archive fw_6205a.archive fw_6205b.archive \
                fw_7260.archive fw_7265.archive fw_8260.archive fw_1000.archive
 
@@ -80,6 +81,16 @@ SHA(fec)     := 0b379cb19bbd7e38fc5a9a000ea927db55cce519a7400ec7fa705c581a6491dd
 DIR(fec)     := $(SRC_DIR_FEC)
 TAR_OPT(fec) := --strip-components=1  --files-from - < <(sed 's/-x.x.x/-$(VERSION_FEC)/g'     $(REP_DIR)/fec.list)
 HASH_INPUT   += $(REP_DIR)/fec.list
+
+#
+# RealTek r8169 ethernet driver
+#
+SRC_DIR_RED  := src/drivers/nic/r8169
+VERSION_RED  := 4.4.3
+URL(red)     := https://www.kernel.org/pub/linux/kernel/v4.x/linux-$(VERSION_RED).tar.xz
+SHA(red)     := 0b379cb19bbd7e38fc5a9a000ea927db55cce519a7400ec7fa705c581a6491dd
+DIR(red)     := $(SRC_DIR_RED)
+TAR_OPT(red) := --strip-components=1 --files-from - < <(sed 's/-x.x.x/-$(VERSION_RED)/g' $(REP_DIR)/r8169.list)
 
 #
 # libnl sources

@@ -1,4 +1,4 @@
-REQUIRES = arm_v7
+REQUIRES = arm_v7 wand_quad
 
 TARGET   = nic_drv
 LIBS     = base lx_kit_setjmp fec_nic_include

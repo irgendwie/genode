@@ -1,0 +1,3 @@
+linux-x.x.x/drivers/net/ethernet/realtek/r8169.c
+linux-x.x.x/include/linux/pci_ids.h
+linux-x.x.x/include/uapi/linux/pci_regs.h
