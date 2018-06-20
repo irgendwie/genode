@@ -5,7 +5,7 @@ proc have_platform_drv {} {
 
 	return [expr [have_spec arndale] \
 	          || [have_spec imx53] \
-	          || [have_spec rpi] \
+	          || [expr [have_spec rpi] || [have_spec rpi2]] \
 	          || [have_spec odroid_x2] \
 	          || [have_spec x86]]
 }
@@ -35,7 +35,7 @@ proc need_usb_hid { } {
 #
 proc nic_drv_binary { } {
 	if {[have_spec linux]} { return linux_nic_drv }
-	if {[have_spec omap4] || [have_spec arndale] || [have_spec rpi]} { return usb_drv }
+	if {[have_spec omap4] || [have_spec arndale] || [expr [have_spec rpi] || [have_spec rpi2]]} { return usb_drv }
 	if {!([have_spec riscv] || [have_spec odroid_xu])} { return nic_drv }
 	return no_nic_drv_available
 }
@@ -49,7 +49,7 @@ proc nic_drv_config { } {
 		return "<config><card type=\"fsl,imx25-fec\" mii=\"rmii\" irq=\"87\" mmio=\"0x63fec000\"/></config>" }
 	if {[have_spec wand_quad]} {
 		return "<config><card type=\"fsl,imx6q-fec\" mii=\"rgmii\" irq=\"150\" mmio=\"0x2188000\"/></config>" }
-	if {[have_spec omap4] || [have_spec arndale] || [have_spec rpi]} {
+	if {[have_spec omap4] || [have_spec arndale] || [expr [have_spec rpi] || [have_spec rpi2]]} {
 		return {<config uhci="yes" ohci="yes" ehci="yes"><nic mac="02:00:00:00:01:01"/></config>} }
 	return ""
 }
@@ -266,7 +266,7 @@ proc platform_drv_config {} {
 		append_if [expr [have_spec x86] && ![have_spec muen]] drv_config {
 			<service name="ROM" label="acpi"> <child name="acpi_report_rom"/> </service>}
 
-		append_if [have_spec rpi] drv_config {
+		append_if [expr [have_spec rpi] || [have_spec rpi2]] drv_config {
 			<service name="Timer"> <any-child/> </service>}
 
 		append drv_config {
