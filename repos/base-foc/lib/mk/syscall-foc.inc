@@ -15,7 +15,8 @@ L4_BUILD_DIR := $(shell pwd)/build
 L4_INC_TARGETS += l4/sys \
                   l4f/l4/sys \
                   l4/sigma0 \
-                  l4/vcpu
+                  l4/vcpu \
+                  l4/cxx
 
 CC_OPT += -Iinclude
 
@@ -46,7 +47,8 @@ PKGS := l4re-core/ldscripts \
         l4re-core/libgcc-pure \
         l4re-core/l4sys \
         l4re-core/libgcc \
-        l4re-core/libsigma0
+        l4re-core/libsigma0 \
+        l4re-core/cxx/lib/tl
 
 include $(REP_DIR)/lib/mk/l4_pkg.inc
 
