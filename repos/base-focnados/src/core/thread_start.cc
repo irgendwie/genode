@@ -37,7 +37,7 @@ void Thread::_deinit_platform_thread()
 }
 
 
-void Thread::_init_platform_thread(size_t, Type) { }
+void Thread::_init_platform_thread(size_t, Type, Affinity::Location) { }
 
 
 void Thread::start()

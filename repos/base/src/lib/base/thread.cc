@@ -226,7 +226,7 @@ Thread::Thread(size_t weight, const char *name, size_t stack_size,
 	       _stack : _alloc_stack(stack_size, name, type == MAIN)),
 	_join_lock(Lock::LOCKED)
 {
-	_init_platform_thread(weight, type);
+	_init_platform_thread(weight, type, _affinity);
 
 	if (_cpu_session) {
 		Dataspace_capability ds = _cpu_session->trace_control();
@@ -245,7 +245,7 @@ Thread::Thread(Env &env, Name const &name, size_t stack_size, Location location,
                Weight weight, Cpu_session &cpu)
 : Thread(weight.value, name.string(), stack_size, NORMAL,
          &cpu == &env.cpu() ? nullptr : &cpu, location)
-{ }
+{ Genode::log("PIEP",location.xpos());}
 
 
 Thread::Thread(Env &env, Name const &name, size_t stack_size)
