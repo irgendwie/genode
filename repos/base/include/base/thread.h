@@ -151,7 +151,8 @@ class Genode::Thread
 		 * \param weight  weighting regarding the CPU session quota
 		 * \param type    enables selection of special initialization
 		 */
-		void _init_platform_thread(size_t weight, Type type);
+
+		void _init_platform_thread(size_t weight, Type type, Affinity::Location _affinity);
 
 	public:
 

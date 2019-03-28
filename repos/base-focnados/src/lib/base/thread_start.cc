@@ -45,7 +45,7 @@ void Thread::_deinit_platform_thread()
 }
 
 
-void Thread::_init_platform_thread(size_t weight, Type type)
+void Thread::_init_platform_thread(size_t weight, Type type, Affinity::Location _affinity)
 {
 	/* if no cpu session is given, use it from the environment */
 	if (!_cpu_session)
@@ -55,7 +55,7 @@ void Thread::_init_platform_thread(size_t weight, Type type)
 	{
 		/* create thread at core */
 		_thread_cap = _cpu_session->create_thread(env()->pd_session_cap(), name(),
-		                                          Location(), Weight(weight));
+		                                          _affinity, Weight(weight));
 
 		/* assign thread to protection domain */
 		if (!_thread_cap.valid())
