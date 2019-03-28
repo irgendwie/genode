@@ -245,7 +245,7 @@ Thread::Thread(Env &env, Name const &name, size_t stack_size, Location location,
                Weight weight, Cpu_session &cpu)
 : Thread(weight.value, name.string(), stack_size, NORMAL,
          &cpu == &env.cpu() ? nullptr : &cpu, location)
-{ Genode::log("PIEP",location.xpos());}
+{ }
 
 
 Thread::Thread(Env &env, Name const &name, size_t stack_size)
