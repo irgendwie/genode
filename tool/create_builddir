@@ -132,6 +132,7 @@ $(BUILD_DIR)/etc:
 BUILD_CONF_X86_32 := run_qemu_iso run_opt_x86_32 run_boot_dir qemu_opt_x86 repos repos_x86
 BUILD_CONF_X86_64 := run_qemu_iso run_opt_x86_64 run_boot_dir qemu_opt_x86 repos repos_x86
 BUILD_CONF_PBXA9  := run_qemu run_opt_arm_hw_foc run_boot_dir qemu_opt_arm repos
+BUILD_CONF_ZCU102 := run_qemu run_opt_arm_hw_foc run_boot_dir qemu_opt_arm repos
 
 BUILD_CONF(x86_32) := run_kernel_x86_32 $(BUILD_CONF_X86_32)
 BUILD_CONF(x86_64) := run_kernel_x86_64 $(BUILD_CONF_X86_64)
@@ -149,7 +150,7 @@ BUILD_CONF(zynq_qemu)    := run_kernel_hw run_qemu run_opt_hw run_boot_dir qemu_
 BUILD_CONF(muen)         := run_kernel_hw run_opt_muen        run_boot_dir repos repos_x86
 BUILD_CONF(riscv_spike)  := run_kernel_hw run_opt_spike       run_boot_dir repos
 BUILD_CONF(linux)        := run_kernel_linux repos
-BUILD_CONF(zcu102)       := run_kernel_foc    run_boot_dir repos
+BUILD_CONF(zcu102)       := run_kernel_foc $(BUILD_CONF_ZCU102)
 
 # deprecated platforms, to be removed
 BUILD_CONF(linux_x86)       := run_kernel_linux repos
