@@ -198,10 +198,10 @@ void Platform_thread::resume()
 }
 
 
-void Platform_thread::state(Thread_state)
+void Platform_thread::state(Thread_state s)
 {
-	warning(__PRETTY_FUNCTION__, " not implemented");
-	throw Cpu_thread::State_access_failed();
+	if (_pager)
+		*static_cast<Thread_state *>(&_pager->state) = s;
 }
 
 
