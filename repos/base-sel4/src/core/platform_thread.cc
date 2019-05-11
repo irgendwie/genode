@@ -200,8 +200,33 @@ void Platform_thread::resume()
 
 void Platform_thread::state(Thread_state s)
 {
-	if (_pager)
-		*static_cast<Thread_state *>(&_pager->state) = s;
+	seL4_TCB const thread = _info.tcb_sel.value();
+	seL4_Bool const suspend_source = false;
+	seL4_Uint8 const arch_flags = 0;
+	seL4_UserContext registers;
+	seL4_Word const register_count = sizeof(registers) / sizeof(registers.pc);
+
+	registers.r0 = s.r0;
+	registers.r1 = s.r1;
+	registers.r2 = s.r2;
+	registers.r3 = s.r3;
+	registers.r4 = s.r4;
+	registers.r5 = s.r5;
+	registers.r6 = s.r6;
+	registers.r7 = s.r7;
+	registers.r8 = s.r8;
+	registers.r9 = s.r9;
+	registers.r10 = s.r10;
+	registers.r11 = s.r11;
+	registers.r12 = s.r12;
+	registers.sp = s.sp;
+	registers.r14 = s.lr;
+	registers.pc = s.ip;
+	registers.cpsr = s.cpsr;
+
+	long const ret = seL4_TCB_WriteRegisters(thread, suspend_source, arch_flags, register_count, &registers);
+
+	ASSERT(ret == 0);
 }
 
 
