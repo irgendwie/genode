@@ -727,6 +727,7 @@ _ZNSi10_M_extractImEERSiRT_ W
 _ZNSi10_M_extractIyEERSiRT_ W
 _ZNSi3getERc W
 _ZNSi4peekEv W
+_ZNSi4readEPcl W
 _ZNSi7getlineEPcl W
 _ZNSi7putbackEc W
 _ZNSirsERd W
