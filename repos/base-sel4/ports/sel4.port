@@ -31,3 +31,6 @@ default: $(DOWNLOADS)
 	$(VERBOSE)mkdir -p src/kernel/sel4/configs/imx7/imx7d_sabre
 	$(VERBOSE)mv src/kernel/sel4/configs/imx7/autoconf.h src/kernel/sel4/configs/imx7/imx7d_sabre/autoconf.h
 	$(VERBOSE)patch -p0 <$(REP_DIR)/patches/imx7d_sabre.config
+	$(VERBOSE)mkdir -p src/kernel/sel4/configs/zynq7000/zybo
+	$(VERBOSE)mv src/kernel/sel4/configs/zynq7000/autoconf.h src/kernel/sel4/configs/zynq7000/zybo/autoconf.h
+	$(VERBOSE)patch -p0 <$(REP_DIR)/patches/zybo.config

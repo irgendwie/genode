@@ -102,6 +102,8 @@ proc run_boot_dir {binaries} {
 			set ::env(PLAT) imx6
 		} elseif {[have_spec imx7d_sabre]} {
 			set ::env(PLAT) imx7
+		} elseif {[have_spec zybo]} {
+			set ::env(PLAT) zynq7000
 		} else {
 			puts "abort - unknown ARM board"
 			exit 1
