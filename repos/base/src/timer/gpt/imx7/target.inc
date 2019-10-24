@@ -1,5 +1,5 @@
 TARGET   = imx7_timer_drv
-REQUIRES = arm_v7
+REQUIRES = imx7
 GEN_DIR := $(BASE_DIR)/src/timer
 INC_DIR += $(GEN_DIR)/gpt
 SRC_CC  += gpt/time_source.cc gpt/imx7/timer.cc
